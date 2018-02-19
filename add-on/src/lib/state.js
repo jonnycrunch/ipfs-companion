@@ -1,9 +1,6 @@
 'use strict'
 /* eslint-env browser, webextensions */
-const browser = require('webextension-polyfill')
 
-// The State
-// ===================================================================
 const offlinePeerCount = -1
 
 function initState (options) {
@@ -26,22 +23,6 @@ function initState (options) {
   state.catchUnhandledProtocols = options.catchUnhandledProtocols
   state.displayNotifications = options.displayNotifications
   return state
-}
-
-// Browser Feature Detection
-// ===================================================================
-
-exports.inFirefox = function () {
-  // TODO: switch to (await browser.runtime.getBrowserInfo()).name
-  return !!navigator.userAgent.match('Firefox')
-}
-
-exports.browserWithNativeProtocol = function () {
-  return browser && browser.protocol && browser.protocol.registerStringProtocol
-}
-
-exports.embeddedNodeIsActive = function (state) {
-  return state.ipfsNodeType === 'embedded'
 }
 
 exports.initState = initState
